@@ -100,11 +100,11 @@ float Remap01(float val, float minVal, float maxVal)
 
 void ResolveCollisions(inout float3 pos, inout float3 vel, float collisionDamping)
 {
-    // Transform position/velocity to the local space of the bounding box (scale not included)
+    // Transform position/velocity to the local space of the bounding box
     float3 posLocal = mul(worldToLocal, float4(pos, 1)).xyz;
     float3 velocityLocal = mul(worldToLocal, float4(vel, 0)).xyz;
 
-    // Calculate distance from box on each axis (negative values are inside box)
+    // Calculate distance from box on each axis (negative values are outside box)
     const float3 halfSize = 0.5;
     const float3 edgeDst = halfSize - abs(posLocal);
 
