@@ -25,9 +25,19 @@ public class ParticleDisplay2D : MonoBehaviour
 
 		argsBuffer = ComputeHelper.CreateArgsBuffer(mesh, sim.positionBuffer.count);
 		bounds = new Bounds(Vector3.zero, Vector3.one * 10000);
-	}
+    }
+    public void Init(SwarmSimulation sim)
+    {
+        material = new Material(shader);
+        material.SetBuffer("Positions2D", sim.positionBuffer);
+        material.SetBuffer("Velocities", sim.velocityBuffer);
+        material.SetBuffer("DensityData", sim.densityBuffer);
 
-	void LateUpdate()
+        argsBuffer = ComputeHelper.CreateArgsBuffer(mesh, sim.positionBuffer.count);
+        bounds = new Bounds(Vector3.zero, Vector3.one * 10000);
+    }
+
+    void LateUpdate()
 	{
 		if (shader != null)
 		{
